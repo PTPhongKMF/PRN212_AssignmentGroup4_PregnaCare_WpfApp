@@ -11,7 +11,7 @@
     <Grid>
         <!-- Background Image -->
         <Grid.Background>
-            <ImageBrush ImageSource="D:\PRN212_AssignmentGroup4_PregnaCare_WpfApp\PregnaCare_WpfApp\Images\anh.jpg" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="Images\anh.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
 
         <!-- Semi-transparent overlay -->
