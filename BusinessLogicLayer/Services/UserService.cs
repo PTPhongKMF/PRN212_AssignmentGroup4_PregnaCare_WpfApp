@@ -21,5 +21,20 @@ namespace BusinessLogicLayer.Services
         {
             return _userRepository.GetUser(email, password);
         }
+        
+        public User? GetUserById(Guid id)
+        {
+            return _userRepository.GetUserById(id);
+        }
+        
+        public bool UpdateUser(User user)
+        {
+            return _userRepository.UpdateUser(user);
+        }
+        
+        public List<User> GetAllUsers()
+        {
+            return _userRepository.GetAllUsers();
+        }
     }
 }
