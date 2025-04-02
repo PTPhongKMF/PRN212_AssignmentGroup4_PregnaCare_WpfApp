@@ -24,8 +24,17 @@
                 </Grid.RowDefinitions>
                 
                 <!-- Header -->
-                <TextBlock Grid.Row="0" Text="User Profile" FontSize="24" FontWeight="Bold" 
-                           Margin="0,0,0,20" HorizontalAlignment="Left"/>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="User Profile" FontSize="24" FontWeight="Bold" 
+                               Margin="0,0,0,20" HorizontalAlignment="Left"/>
+                    <Button x:Name="BtnLogout" Grid.Column="1" Content="Logout" 
+                            Width="100" Height="35" Background="#FF5A5A5A" Foreground="White" 
+                            BorderThickness="0" Click="BtnLogout_Click" HorizontalAlignment="Right"/>
+                </Grid>
                 
                 <!-- Profile Info Section -->
                 <Grid Grid.Row="1">

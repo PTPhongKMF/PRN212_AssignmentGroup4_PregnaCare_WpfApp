@@ -79,5 +79,14 @@ namespace PregnaCare_WpfApp {
                 MessageBox.Show("User information updated successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
+
+        private void BtnLogout_Click(object sender, RoutedEventArgs e) {
+            UserSession.Clear();
+            
+            Login loginWindow = new Login();
+            loginWindow.Show();
+            
+            this.Close();
+        }
     }
 }
