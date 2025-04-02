@@ -46,9 +46,11 @@ namespace PregnaCare_WpfApp
                     MessageBox.Show("Login successful");
                     UserSession.Id = useraccount.Id;
                     //MainWindow mainWindow = new MainWindow();
-                    UserInformation userInformation = new UserInformation();
+                    //UserInformation userInformation = new UserInformation();
                     //mainWindow.Show();
-                    userInformation.Show();
+                    //userInformation.Show();
+                    BlogList blogList = new BlogList();
+                    blogList.Show();
                     this.Close();
                 }
                 else

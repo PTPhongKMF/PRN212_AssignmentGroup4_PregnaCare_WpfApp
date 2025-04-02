@@ -1,0 +1,27 @@
+﻿<Window x:Class="PregnaCare_WpfApp.BlogList"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Blog List" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <StackPanel>
+            <!-- Khu vực chứa các nút thao tác -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10">
+                <Button Content="Add Blog" Width="100" Height="30" Margin="5" Click="AddBlog_Click"/>
+                <Button Content="Cancel" Width="100" Height="30" Margin="5" Click="Cancel_Click"/>
+            </StackPanel>
+
+            <!-- Danh sách bài viết -->
+            <ListBox ItemsSource="{Binding Blogs}" SelectedItem="{Binding SelectedBlog}" MouseDoubleClick="BlogItem_Click">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <Image Source="{Binding FeaturedImageUrl}" Width="100" Height="60" Margin="5"/>
+                            <TextBlock Text="{Binding PageTitle}" FontSize="16" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+    </Grid>
+</Window>
