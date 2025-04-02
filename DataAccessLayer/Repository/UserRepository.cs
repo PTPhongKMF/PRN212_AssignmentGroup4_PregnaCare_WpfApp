@@ -56,7 +56,14 @@ namespace DataAccessLayer.Repository
                 var existingUser = _context.Users.SingleOrDefault(u => u.Id == user.Id);
                 if (existingUser == null) return false;
                 
+                // Check if trying to change to an email that's already in use by another user
+                if (existingUser.Email != user.Email && _context.Users.Any(u => u.Email == user.Email && u.Id != user.Id))
+                {
+                    return false;
+                }
+                
                 existingUser.FullName = user.FullName;
+                existingUser.Email = user.Email;
                 existingUser.PhoneNumber = user.PhoneNumber;
                 existingUser.Gender = user.Gender;
                 existingUser.DateOfBirth = user.DateOfBirth;
@@ -76,6 +83,11 @@ namespace DataAccessLayer.Repository
         public List<User> GetAllUsers()
         {
             return _context.Users.Where(u => u.IsDeleted != true).ToList();
+        }
+
+        public bool IsEmailInUse(string email)
+        {
+            return _context.Users.Any(u => u.Email == email);
         }
     }
 }

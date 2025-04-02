@@ -40,5 +40,10 @@ namespace BusinessLogicLayer.Services
         {
             return _userRepository.AddUser(user);
         }
+
+        public bool IsEmailInUse(string email)
+        {
+            return _userRepository.IsEmailInUse(email);
+        }
     }
 }

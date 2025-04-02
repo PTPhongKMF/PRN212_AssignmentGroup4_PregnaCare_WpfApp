@@ -78,8 +78,33 @@ namespace PregnaCare_WpfApp
                 return;
             }
 
+            if (string.IsNullOrWhiteSpace(TxtEmail.Text))
+            {
+                MessageBox.Show("Email is required.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                TxtEmail.Focus();
+                return;
+            }
+            
+            // Check if email format is valid
+            if (!IsValidEmail(TxtEmail.Text.Trim()))
+            {
+                MessageBox.Show("Please enter a valid email address.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                TxtEmail.Focus();
+                return;
+            }
+            
+            // Check if email changed and if it's already in use
+            string newEmail = TxtEmail.Text.Trim();
+            if (newEmail != _user.Email && _userService.IsEmailInUse(newEmail))
+            {
+                MessageBox.Show("This email is already in use by another account.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                TxtEmail.Focus();
+                return;
+            }
+
             // Update user information
             _user.FullName = TxtFullName.Text.Trim();
+            _user.Email = TxtEmail.Text.Trim();
             _user.PhoneNumber = TxtPhoneNumber.Text.Trim();
             
             // Get gender from combobox
@@ -110,6 +135,12 @@ namespace PregnaCare_WpfApp
                 MessageBox.Show("Failed to update user information. Please try again.", "Error", 
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+            return System.Text.RegularExpressions.Regex.IsMatch(email, pattern);
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)

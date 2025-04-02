@@ -25,7 +25,7 @@
                 
                 <!-- Email -->
                 <TextBlock Text="Email:" FontWeight="SemiBold" Margin="0,5,0,0"/>
-                <TextBox x:Name="TxtEmail" Margin="0,5,0,10" Padding="5" IsReadOnly="True" Background="#F0F0F0"/>
+                <TextBox x:Name="TxtEmail" Margin="0,5,0,10" Padding="5"/>
                 
                 <!-- Phone Number -->
                 <TextBlock Text="Phone Number:" FontWeight="SemiBold" Margin="0,5,0,0"/>
