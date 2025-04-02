@@ -45,5 +45,23 @@ namespace BusinessLogicLayer.Services
         {
             return _blogRepository.DeleteBlog(id);
         }
+
+        // Get blogs by tag ID
+        public List<Blog> GetBlogsByTagId(Guid tagId)
+        {
+            return _blogRepository.GetBlogsByTagId(tagId);
+        }
+
+        // Search blogs by title
+        public List<Blog> SearchBlogs(string searchTerm)
+        {
+            return _blogRepository.SearchBlogs(searchTerm);
+        }
+
+        // Increment the view count of a blog
+        public bool IncrementViewCount(Guid blogId)
+        {
+            return _blogRepository.IncrementViewCount(blogId);
+        }
     }
 }

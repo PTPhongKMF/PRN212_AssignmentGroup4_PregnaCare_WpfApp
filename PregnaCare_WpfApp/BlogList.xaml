@@ -4,24 +4,97 @@
         Title="Blog List" Height="450" Width="800"
         WindowStartupLocation="CenterScreen">
     <Grid>
-        <StackPanel>
-            <!-- Khu vực chứa các nút thao tác -->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10">
-                <Button Content="Add Blog" Width="100" Height="30" Margin="5" Click="AddBlog_Click"/>
-                <Button Content="Cancel" Width="100" Height="30" Margin="5" Click="Cancel_Click"/>
-            </StackPanel>
-
-            <!-- Danh sách bài viết -->
-            <ListBox ItemsSource="{Binding Blogs}" SelectedItem="{Binding SelectedBlog}" MouseDoubleClick="BlogItem_Click">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal" Margin="10">
-                            <Image Source="{Binding FeaturedImageUrl}" Width="100" Height="60" Margin="5"/>
-                            <TextBlock Text="{Binding PageTitle}" FontSize="16" VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Action buttons area -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="10">
+            <Button Content="Add Blog" Width="100" Height="30" Margin="5" Click="AddBlog_Click"/>
+            <Button Content="Cancel" Width="100" Height="30" Margin="5" Click="Cancel_Click"/>
         </StackPanel>
+        
+        <!-- Search and Filter area -->
+        <Grid Grid.Row="1" Margin="10,0,10,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- Search bar -->
+            <Grid Grid.Column="0">
+                <TextBox x:Name="TxtSearch" Padding="5" Margin="5,0" VerticalContentAlignment="Center" 
+                         TextChanged="TxtSearch_TextChanged"/>
+                <TextBlock Text="Search by title..." Margin="10,0,0,0" VerticalAlignment="Center" 
+                           Foreground="Gray" IsHitTestVisible="False">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName=TxtSearch}" Value="">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Grid>
+            
+            <!-- Filter by tag -->
+            <TextBlock Grid.Column="1" Text="Filter by Tag:" VerticalAlignment="Center" Margin="5,0"/>
+            <ComboBox Grid.Column="2" x:Name="CmbTagFilter" Width="150" Margin="5,0" 
+                      ItemsSource="{Binding Tags}" DisplayMemberPath="Name"
+                      SelectedValuePath="Id" SelectionChanged="CmbTagFilter_SelectionChanged"/>
+        </Grid>
+        
+        <!-- Blog list area -->
+        <ListBox Grid.Row="2" x:Name="BlogListBox" ItemsSource="{Binding FilteredBlogs}" 
+                 SelectedItem="{Binding SelectedBlog}" MouseDoubleClick="BlogItem_Click"
+                 VirtualizingStackPanel.VirtualizationMode="Recycling"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <!-- Blog Image -->
+                        <Border Grid.Column="0" Width="100" Height="70" Margin="0,0,10,0"
+                                BorderThickness="1" BorderBrush="#DDDDDD">
+                            <Image Source="{Binding FeaturedImageUrl}" Stretch="UniformToFill"/>
+                        </Border>
+                        
+                        <!-- Blog Details -->
+                        <StackPanel Grid.Column="1">
+                            <!-- Blog Title -->
+                            <TextBlock Text="{Binding PageTitle}" FontSize="16" FontWeight="SemiBold" 
+                                       TextWrapping="Wrap" Margin="0,0,0,5"/>
+                            
+                            <!-- Blog Tags -->
+                            <ItemsControl ItemsSource="{Binding BlogTags}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel Orientation="Horizontal"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Background="#E8F0FE" CornerRadius="4" Margin="0,0,5,0" 
+                                                Padding="5,2">
+                                            <TextBlock Text="{Binding Tag.Name}" FontSize="11"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>

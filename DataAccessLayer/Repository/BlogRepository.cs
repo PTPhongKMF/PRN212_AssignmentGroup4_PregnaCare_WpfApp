@@ -70,5 +70,47 @@ namespace DataAccessLayer.Repository
         {
             return title.ToLower().Replace(" ", "-"); // Tạo URL handle từ tiêu đề
         }
+        
+        public List<Blog> GetBlogsByTagId(Guid tagId)
+        {
+            return _context.BlogTags
+                .Where(bt => bt.TagId == tagId && bt.IsDeleted != true)
+                .Select(bt => bt.Blog)
+                .Where(b => b.IsDeleted != true && b.IsVisible == true)
+                .ToList();
+        }
+        
+        public List<Blog> SearchBlogs(string searchTerm)
+        {
+            if (string.IsNullOrWhiteSpace(searchTerm))
+                return GetAllBlogs();
+                
+            searchTerm = searchTerm.ToLower();
+            
+            return _context.Blogs
+                .Where(b => b.IsDeleted != true && 
+                           b.IsVisible == true && 
+                           (b.PageTitle.ToLower().Contains(searchTerm) || 
+                            (b.ShortDescription != null && b.ShortDescription.ToLower().Contains(searchTerm)) ||
+                            (b.Content != null && b.Content.ToLower().Contains(searchTerm))))
+                .ToList();
+        }
+        
+        public bool IncrementViewCount(Guid blogId)
+        {
+            try
+            {
+                var blog = _context.Blogs.FirstOrDefault(b => b.Id == blogId && b.IsDeleted != true);
+                if (blog == null) return false;
+
+                // Increment view count
+                blog.ViewCount = (blog.ViewCount ?? 0) + 1;
+                return _context.SaveChanges() > 0;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

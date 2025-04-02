@@ -1,22 +1,122 @@
 ﻿<Window x:Class="PregnaCare_WpfApp.BlogDetail"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Blog Detail" Height="500" Width="600"
+        Title="Blog Detail" Height="700" Width="900"
         WindowStartupLocation="CenterScreen">
     <Grid>
+        <!-- Main ScrollViewer containing all content -->
         <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <StackPanel Margin="10">
-                <TextBlock Name="BlogTitle" FontSize="24" FontWeight="Bold" Margin="5"/>
-                <Image Name="BlogImage" Width="300" Height="200" Margin="5" Stretch="UniformToFill"/>
-                <TextBlock Name="BlogHeading" FontSize="18" FontWeight="SemiBold" Margin="5"/>
-                <TextBlock Name="BlogShortDescription" FontSize="14" TextWrapping="Wrap" Margin="5"/>
-                <TextBlock Name="BlogContent" FontSize="14" TextWrapping="Wrap" Margin="5"/>
-                <TextBlock Name="BlogUrlHandle" FontSize="12" Foreground="Gray" Margin="5"/>
-                <TextBlock Name="BlogViewCount" FontSize="12" Foreground="Gray" Margin="5"/>
-                <TextBlock Name="BlogCreatedAt" FontSize="12" Foreground="Gray" Margin="5"/>
-                <TextBlock Name="BlogUpdatedAt" FontSize="12" Foreground="Gray" Margin="5"/>
-                <TextBlock Name="BlogIsVisible" FontSize="12" Foreground="Gray" Margin="5"/>
-                <Button Content="Back" Width="100" Height="30" Margin="5" Click="Back_Click"/>
+            <StackPanel Margin="20">
+                <!-- Blog Header -->
+                <TextBlock Name="BlogTitle" FontSize="28" FontWeight="Bold" Margin="0,0,0,15"/>
+                
+                <!-- Blog Image -->
+                <Border BorderBrush="#DDDDDD" BorderThickness="1" Margin="0,0,0,20">
+                    <Image Name="BlogImage" Height="300" Margin="0" Stretch="UniformToFill"/>
+                </Border>
+                
+                <!-- Blog Content -->
+                <TextBlock Name="BlogHeading" FontSize="20" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                <TextBlock Name="BlogShortDescription" FontSize="16" FontStyle="Italic" TextWrapping="Wrap" Margin="0,0,0,20"/>
+                <TextBlock Name="BlogContent" FontSize="16" TextWrapping="Wrap" Margin="0,0,0,20"/>
+                
+                <!-- Blog Meta Info -->
+                <Border BorderBrush="#EEEEEE" BorderThickness="1" Padding="15" Background="#F9F9F9" Margin="0,0,0,20">
+                    <StackPanel>
+                        <TextBlock Name="BlogUrlHandle" FontSize="13" Foreground="Gray" Margin="0,0,0,5"/>
+                        <TextBlock Name="BlogViewCount" FontSize="13" Foreground="Gray" Margin="0,0,0,5"/>
+                        <TextBlock Name="BlogCreatedAt" FontSize="13" Foreground="Gray" Margin="0,0,0,5"/>
+                        <TextBlock Name="BlogUpdatedAt" FontSize="13" Foreground="Gray" Margin="0,0,0,5"/>
+                        <TextBlock Name="BlogIsVisible" FontSize="13" Foreground="Gray" Margin="0"/>
+                    </StackPanel>
+                </Border>
+                
+                <!-- Tags Section -->
+                <TextBlock Text="Tags:" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,5"/>
+                <ItemsControl Name="BlogTags" Margin="0,0,0,20">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="#E8F0FE" CornerRadius="4" Margin="0,0,5,5" Padding="8,4">
+                                <TextBlock Text="{Binding Tag.Name}" FontSize="12"/>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                
+                <!-- Navigation Button -->
+                <Button Content="Back to Blog List" Width="150" Height="35" Margin="0,10,0,30" 
+                        HorizontalAlignment="Left" Click="Back_Click" 
+                        Background="#007BFF" Foreground="White" BorderThickness="0"/>
+                
+                <!-- Comments Section -->
+                <Border BorderBrush="#EEEEEE" BorderThickness="0,1,0,0" Background="White" Padding="0,20,0,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        
+                        <!-- Comments Header -->
+                        <TextBlock Grid.Row="0" Text="Comments" FontSize="20" FontWeight="SemiBold" Margin="0,0,0,15"/>
+                        
+                        <!-- Add Comment Section -->
+                        <Grid Grid.Row="1" Margin="0,0,0,20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            
+                            <TextBox Grid.Row="0" x:Name="TxtComment" TextWrapping="Wrap" AcceptsReturn="True" 
+                                    Height="80" Padding="10" Margin="0,0,0,10"
+                                    BorderBrush="#DDDDDD" Background="#F9F9F9"/>
+                            
+                            <Button Grid.Row="1" Content="Post Comment" Width="120" Height="35"
+                                    HorizontalAlignment="Right" Click="PostComment_Click"
+                                    Background="#28a745" Foreground="White" BorderThickness="0"/>
+                        </Grid>
+                        
+                        <!-- Comments List -->
+                        <ItemsControl Grid.Row="2" x:Name="CommentsList" ItemsSource="{Binding Comments}" Margin="0,0,0,20">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="#EEEEEE" BorderThickness="0,0,0,1" 
+                                            Padding="0,10,0,10" Margin="0,5">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            
+                                            <!-- Comment User & Date -->
+                                            <Grid Grid.Row="0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                
+                                                <TextBlock Grid.Column="0" Text="{Binding User.FullName}" 
+                                                        FontWeight="SemiBold" FontSize="14"/>
+                                                <TextBlock Grid.Column="1" Text="{Binding CreatedAt, StringFormat='{}{0:dd/MM/yyyy HH:mm}'}" 
+                                                        Foreground="Gray" FontSize="12" VerticalAlignment="Center"/>
+                                            </Grid>
+                                            
+                                            <!-- Comment Content -->
+                                            <TextBlock Grid.Row="1" Text="{Binding CommentText}" TextWrapping="Wrap" 
+                                                    Margin="0,8,0,0" FontSize="14"/>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </Border>
             </StackPanel>
         </ScrollViewer>
     </Grid>
