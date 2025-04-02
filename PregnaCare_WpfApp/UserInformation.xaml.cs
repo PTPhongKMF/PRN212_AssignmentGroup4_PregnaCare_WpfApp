@@ -61,8 +61,12 @@ namespace PregnaCare_WpfApp {
                 try {
                     UserImage.Source = new BitmapImage(new Uri(_currentUser.ImageUrl));
                 } catch {
-                    // Use default image or handle error
+                    // Use default image if loading fails
+                    UserImage.Source = new BitmapImage(new Uri("https://png.pngtree.com/png-vector/20190820/ourmid/pngtree-no-image-vector-illustration-isolated-png-image_1694547.jpg"));
                 }
+            } else {
+                // No image URL, set default image
+                UserImage.Source = new BitmapImage(new Uri("https://png.pngtree.com/png-vector/20190820/ourmid/pngtree-no-image-vector-illustration-isolated-png-image_1694547.jpg"));
             }
         }
         
