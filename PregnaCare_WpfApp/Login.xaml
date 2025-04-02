@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PregnaCare_WpfApp"
         mc:Ignorable="d"
-        Title="Login" Height="450" Width="800"
+        Title="Login" Height="500" Width="800"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
     <Grid>
@@ -21,7 +21,7 @@
         <Border Background="#FFFFFFFF" 
                 Border.CornerRadius="10" 
                 Width="320" 
-                Height="380"
+                Height="414"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center">
             <StackPanel Margin="20" VerticalAlignment="Center">
@@ -47,7 +47,7 @@
                                Foreground="#FF555555"
                                Margin="0,0,0,5"/>
                     <Border BorderBrush="#FFCCCCCC" BorderThickness="1" Border.CornerRadius="5">
-                        <TextBox x:Name="txtEmail" Height="35" Padding="10" Background="Transparent"/>
+                        <TextBox x:Name="txtEmail" Height="40" Padding="10" Background="Transparent"/>
                     </Border>
                 </StackPanel>
 
@@ -57,7 +57,7 @@
                                Foreground="#FF555555"
                                Margin="0,0,0,5"/>
                     <Border BorderBrush="#FFCCCCCC" BorderThickness="1" Border.CornerRadius="5">
-                        <PasswordBox x:Name="txtPassword" Height="35" Padding="10" Background="Transparent"/>
+                        <PasswordBox x:Name="txtPassword" Height="40" Padding="10" Background="Transparent"/>
                     </Border>
                 </StackPanel>
 
@@ -73,6 +73,16 @@
                             Cursor="Hand" Click="btnLogin_Click"/>
                 </Border>
 
+                <!-- Register Link -->
+                <StackPanel Margin="0,0,0,20">
+                <TextBlock Text="Don't have an account? Register here" 
+                    Foreground="#FF4A6FB5"
+                    FontSize="14"
+                    HorizontalAlignment="Center"
+                    Margin="0,20,0,0"
+                    Cursor="Hand"
+                    MouseDown="RegisterLink_MouseDown"/>
+                </StackPanel>    
             </StackPanel>
         </Border>
     </Grid>

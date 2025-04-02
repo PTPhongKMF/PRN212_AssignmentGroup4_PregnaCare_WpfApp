@@ -1,4 +1,6 @@
 ﻿using BusinessLogicLayer.Services;
+using Microsoft.Win32;
+using PregnaCare_WpfApp.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,8 +44,11 @@ namespace PregnaCare_WpfApp
                 if (useraccount != null)
                 {
                     MessageBox.Show("Login successful");
-                    MainWindow mainWindow = new MainWindow();
-                    mainWindow.Show();
+                    UserSession.Id = useraccount.Id;
+                    //MainWindow mainWindow = new MainWindow();
+                    UserInformation userInformation = new UserInformation();
+                    //mainWindow.Show();
+                    userInformation.Show();
                     this.Close();
                 }
                 else
@@ -55,6 +60,12 @@ namespace PregnaCare_WpfApp
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+        private void RegisterLink_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Register registerWindow = new Register(); // Tạo cửa sổ đăng ký
+            registerWindow.Show(); // Mở cửa sổ đăng ký
+            this.Close(); // Đóng cửa sổ đăng nhập
         }
     }
 }

@@ -24,7 +24,31 @@ namespace DataAccessLayer.Repository
         {
             return _context.Users.SingleOrDefault(u => u.Id == id);
         }
-        
+        public bool AddUser(User user)
+        {
+            try
+            {
+                if (_context.Users.Any(u => u.Email == user.Email))
+                {
+                    return false; // Không cho phép đăng ký trùng email
+                }
+
+                user.Id = Guid.NewGuid();
+                user.CreatedAt = DateTime.Now;
+                user.UpdatedAt = DateTime.Now;
+                user.IsDeleted = false;
+
+                _context.Users.Add(user);
+                _context.SaveChanges();
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public bool UpdateUser(User user)
         {
             try

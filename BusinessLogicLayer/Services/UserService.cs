@@ -36,5 +36,9 @@ namespace BusinessLogicLayer.Services
         {
             return _userRepository.GetAllUsers();
         }
+        public bool AddUser(User user)
+        {
+            return _userRepository.AddUser(user);
+        }
     }
 }

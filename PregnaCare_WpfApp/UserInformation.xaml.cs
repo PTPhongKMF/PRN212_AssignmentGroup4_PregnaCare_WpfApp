@@ -21,7 +21,7 @@ namespace PregnaCare_WpfApp {
     /// </summary>
     public partial class UserInformation : Window {
         private UserService _userService;
-        private User _currentUser;
+        private User? _currentUser;
         
         public UserInformation() {
             InitializeComponent();
