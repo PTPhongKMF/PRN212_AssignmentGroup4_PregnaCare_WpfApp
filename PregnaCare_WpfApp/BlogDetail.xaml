@@ -3,6 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Blog Detail" Height="700" Width="900"
         WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Window.Resources>
     <Grid>
         <!-- Main ScrollViewer containing all content -->
         <ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -76,7 +79,7 @@
                                     Height="80" Padding="10" Margin="0,0,0,10"
                                     BorderBrush="#DDDDDD" Background="#F9F9F9"/>
                             
-                            <Button Grid.Row="1" Content="Post Comment" Width="120" Height="35"
+                            <Button Grid.Row="1" x:Name="PostCommentButton" Content="Post Comment" Width="120" Height="35"
                                     HorizontalAlignment="Right" Click="PostComment_Click"
                                     Background="#28a745" Foreground="White" BorderThickness="0"/>
                         </Grid>
@@ -101,8 +104,13 @@
                                                     <ColumnDefinition Width="Auto"/>
                                                 </Grid.ColumnDefinitions>
                                                 
-                                                <TextBlock Grid.Column="0" Text="{Binding User.FullName}" 
-                                                        FontWeight="SemiBold" FontSize="14"/>
+                                                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding User.FullName}" 
+                                                             FontWeight="SemiBold" FontSize="14"/>
+                                                    <TextBlock Text=" (@" Foreground="Gray" FontSize="12" VerticalAlignment="Center"/>
+                                                    <TextBlock Text="{Binding User.Username}" Foreground="Gray" FontSize="12" VerticalAlignment="Center"/>
+                                                    <TextBlock Text=")" Foreground="Gray" FontSize="12" VerticalAlignment="Center"/>
+                                                </StackPanel>
                                                 <TextBlock Grid.Column="1" Text="{Binding CreatedAt, StringFormat='{}{0:dd/MM/yyyy HH:mm}'}" 
                                                         Foreground="Gray" FontSize="12" VerticalAlignment="Center"/>
                                             </Grid>
@@ -110,6 +118,20 @@
                                             <!-- Comment Content -->
                                             <TextBlock Grid.Row="1" Text="{Binding CommentText}" TextWrapping="Wrap" 
                                                     Margin="0,8,0,0" FontSize="14"/>
+                                            
+                                            <!-- Comment Actions -->
+                                            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0">
+                                                <Button x:Name="BtnEditComment" Content="Edit" 
+                                                       Width="60" Height="25" Margin="0,0,5,0" 
+                                                       Background="#007BFF" Foreground="White" BorderThickness="0"
+                                                       Tag="{Binding Id}" Click="EditComment_Click"
+                                                       Visibility="{Binding CanEdit, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                                                <Button x:Name="BtnDeleteComment" Content="Delete" 
+                                                       Width="60" Height="25" 
+                                                       Background="#DC3545" Foreground="White" BorderThickness="0"
+                                                       Tag="{Binding Id}" Click="DeleteComment_Click"
+                                                       Visibility="{Binding CanDelete, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                                            </StackPanel>
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
