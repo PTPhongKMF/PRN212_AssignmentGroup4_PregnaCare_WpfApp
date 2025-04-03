@@ -42,8 +42,16 @@ namespace PregnaCare_WpfApp {
                 
                 DisplayUserInfo();
                 
-                // Set visibility of membership buttons based on role
+                // Set visibility of buttons based on role
                 bool isAdmin = UserSession.RoleName?.ToLower() == "admin";
+                
+                // Blog buttons
+                BtnViewBlogs.Visibility = isAdmin ? Visibility.Collapsed : Visibility.Visible;
+                BtnManageBlogs.Visibility = isAdmin ? Visibility.Visible : Visibility.Collapsed;
+                TxtUserBlogDesc.Visibility = isAdmin ? Visibility.Collapsed : Visibility.Visible;
+                TxtAdminBlogDesc.Visibility = isAdmin ? Visibility.Visible : Visibility.Collapsed;
+                
+                // Membership buttons
                 BtnViewMembership.Visibility = isAdmin ? Visibility.Collapsed : Visibility.Visible;
                 BtnManageMembership.Visibility = isAdmin ? Visibility.Visible : Visibility.Collapsed;
                 TxtUserMembershipDesc.Visibility = isAdmin ? Visibility.Collapsed : Visibility.Visible;
@@ -110,6 +118,18 @@ namespace PregnaCare_WpfApp {
         private void BtnManageMembership_Click(object sender, RoutedEventArgs e) {
             AdminMembershipPlanView adminMembership = new AdminMembershipPlanView();
             adminMembership.Show();
+            this.Close();
+        }
+        
+        private void BtnViewBlogs_Click(object sender, RoutedEventArgs e) {
+            BlogList blogList = new BlogList();
+            blogList.Show();
+            this.Close();
+        }
+        
+        private void BtnManageBlogs_Click(object sender, RoutedEventArgs e) {
+            BlogList blogList = new BlogList();
+            blogList.Show();
             this.Close();
         }
     }
