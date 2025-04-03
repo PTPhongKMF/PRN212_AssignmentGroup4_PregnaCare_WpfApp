@@ -1,0 +1,42 @@
+<Window x:Class="PregnaCare_WpfApp.Views.MembershipPlanDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Membership Plan Infomation" Height="500" Width="600"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Content="Plan Name:" Margin="0,0,0,5"/>
+        <TextBox x:Name="txtPlanName" Grid.Row="1" Margin="0,0,0,10"/>
+
+        <Label Grid.Row="2" Content="Price:" Margin="0,0,0,5"/>
+        <TextBox x:Name="txtPrice" Grid.Row="3" Margin="0,0,0,10"/>
+
+        <Label Grid.Row="4" Content="Duration (Day):" Margin="0,0,0,5"/>
+        <TextBox x:Name="txtDuration" Grid.Row="5" Margin="0,0,0,10"/>
+
+        <Label Grid.Row="6" Content="Description:" Margin="0,0,0,5"/>
+        <TextBox x:Name="txtDescription" Grid.Row="7" TextWrapping="Wrap" AcceptsReturn="True" 
+                 VerticalScrollBarVisibility="Auto" Margin="0,0,0,10"/>
+
+        <Label Grid.Row="8" Content="Image URL:" Margin="0,0,0,5"/>
+        <TextBox x:Name="txtImageUrl" Grid.Row="9" Margin="0,0,0,10"/>
+
+        <StackPanel Grid.Row="10" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button x:Name="btnSave" Content="Save" Width="80" Height="30" Margin="0,0,10,0" Click="btnSave_Click"/>
+            <Button x:Name="btnCancel" Content="Cancel" Width="80" Height="30" Click="btnCancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Window> 
