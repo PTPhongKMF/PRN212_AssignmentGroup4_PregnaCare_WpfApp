@@ -1,0 +1,67 @@
+﻿<Window x:Class="PregnaCare_WpfApp.UpdateBlogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Update Blog Post" Height="600" Width="800"
+        WindowStartupLocation="CenterScreen">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Page Title -->
+            <Label Grid.Row="0" Content="Page Title:" Margin="0 0 0 5"/>
+            <TextBox Grid.Row="1" x:Name="txtPageTitle" Margin="0 0 0 10"/>
+
+            <!-- Heading -->
+            <Label Grid.Row="2" Content="Heading:" Margin="0 0 0 5"/>
+            <TextBox Grid.Row="3" x:Name="txtHeading" Margin="0 0 0 10"/>
+
+            <!-- Short Description -->
+            <Label Grid.Row="4" Content="Short Description:" Margin="0 0 0 5"/>
+            <TextBox Grid.Row="5" x:Name="txtShortDescription" Margin="0 0 0 10" 
+             AcceptsReturn="True" TextWrapping="Wrap" Height="60"/>
+
+            <!-- Content -->
+            <Label Grid.Row="6" Content="Content:" Margin="0 0 0 5"/>
+            <TextBox Grid.Row="7" x:Name="txtContent" Margin="0 0 0 10" 
+             AcceptsReturn="True" TextWrapping="Wrap" Height="120"/>
+
+            <!-- Featured Image -->
+            <Label Grid.Row="8" Content="Featured Image:" Margin="0 0 0 5"/>
+            <Image Grid.Row="9" x:Name="imgPreview" Width="200" Height="150" 
+           Stretch="Uniform" Margin="0 0 0 10"/>
+
+            <Button Grid.Row="10" x:Name="btnUploadImage" Content="Upload Image" 
+            Click="btnUploadImage_Click" Width="120"/>
+
+            <!-- Ẩn TextBox chứa đường dẫn ảnh -->
+            <TextBox Grid.Row="11" x:Name="txtFeaturedImageUrl" Visibility="Hidden"/>
+
+            <!-- Visibility Checkbox -->
+            <CheckBox Grid.Row="12" x:Name="chkIsVisible" 
+              Content="Make this blog visible" 
+              Margin="0 10 0 10" 
+              IsChecked="True"/>
+
+            <!-- Buttons -->
+            <StackPanel Grid.Row="13" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="btnSave" Content="Save" Width="100" Margin="0 0 10 0" Click="btnSave_Click"/>
+                <Button x:Name="btnCancel" Content="Cancel" Width="100" Click="btnCancel_Click"/>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Window>

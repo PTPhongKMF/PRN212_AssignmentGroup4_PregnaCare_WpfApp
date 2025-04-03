@@ -50,6 +50,17 @@ namespace PregnaCare_WpfApp
             _currentBlog = _blogService.GetBlogById(_blogId);
             if (_currentBlog != null)
             {
+                // Kiểm tra vai trò người dùng hoặc quyền sở hữu blog
+                if (UserSession.RoleName == "Admin" || (_currentBlog != null && UserSession.Id == _currentBlog.UserId))
+                {
+                    btnUpdate.Visibility = Visibility.Visible;
+                    btnDelete.Visibility = Visibility.Visible; 
+                }
+                else
+                {
+                    btnUpdate.Visibility = Visibility.Collapsed;
+                    btnDelete.Visibility = Visibility.Collapsed; 
+                }
                 BlogTitle.Text = _currentBlog.PageTitle;
                 
                 try
@@ -397,6 +408,21 @@ namespace PregnaCare_WpfApp
                 System.Diagnostics.Debug.WriteLine($"DEBUG STACK: {ex.StackTrace}");
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            _blogService.DeleteBlog(_blogId);
+            BlogList blogList = new BlogList();
+            blogList.Show();
+            this.Close();
+        }
+
+        private void Update_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateBlogWindow updateWindow = new UpdateBlogWindow(_blogId);
+            updateWindow.Show();
+            this.Close();
         }
     }
 }
