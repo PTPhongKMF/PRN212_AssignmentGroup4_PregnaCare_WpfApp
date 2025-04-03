@@ -45,6 +45,7 @@ namespace PregnaCare_WpfApp
                 {
                     MessageBox.Show("Login successful");
                     UserSession.Id = useraccount.Id;
+                    UserSession.RoleName = _userService.GetUserRoleName(useraccount.Id);
                     //MainWindow mainWindow = new MainWindow();
                     UserInformation userInformation = new UserInformation();
                     //mainWindow.Show();

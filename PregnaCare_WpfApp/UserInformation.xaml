@@ -101,7 +101,26 @@
 
             <!-- Future content area -->
             <Grid Grid.Row="1" Margin="20">
-                <!-- This space is reserved for future content -->
+                <!-- Membership Section -->
+                <StackPanel>
+                    <TextBlock Text="Membership" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
+                    
+                    <!-- User version -->
+                    <TextBlock x:Name="TxtUserMembershipDesc" Text="View your current membership plan and subscription details" 
+                              Margin="0,0,0,15" Foreground="#666666"/>
+                    <Button x:Name="BtnViewMembership" Content="VIEW CURRENT MEMBERSHIP" 
+                            Width="300" Height="40" Background="#8A2BE2" Foreground="White" 
+                            FontWeight="SemiBold" BorderThickness="0" Click="BtnViewMembership_Click"
+                            HorizontalAlignment="Left"/>
+                    
+                    <!-- Admin version -->
+                    <TextBlock x:Name="TxtAdminMembershipDesc" Text="Manage all membership plans and user subscriptions" 
+                              Margin="0,0,0,15" Foreground="#666666" Visibility="Collapsed"/>
+                    <Button x:Name="BtnManageMembership" Content="MANAGE MEMBERSHIP PLANS" 
+                            Width="300" Height="40" Background="#8A2BE2" Foreground="White" 
+                            FontWeight="SemiBold" BorderThickness="0" Click="BtnManageMembership_Click"
+                            HorizontalAlignment="Left" Visibility="Collapsed"/>
+                </StackPanel>
             </Grid>
         </Grid>
     </ScrollViewer>

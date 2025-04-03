@@ -45,5 +45,10 @@ namespace BusinessLogicLayer.Services
         {
             return _userRepository.IsEmailInUse(email);
         }
+
+        public string GetUserRoleName(Guid userId)
+        {
+            return _userRepository.GetUserRoleName(userId);
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using BusinessLogicLayer.Services;
 using DataAccessLayer.Entities;
 using PregnaCare_WpfApp.Utils;
+using PregnaCare_WpfApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +41,13 @@ namespace PregnaCare_WpfApp {
                 }
                 
                 DisplayUserInfo();
+                
+                // Set visibility of membership buttons based on role
+                bool isAdmin = UserSession.RoleName?.ToLower() == "admin";
+                BtnViewMembership.Visibility = isAdmin ? Visibility.Collapsed : Visibility.Visible;
+                BtnManageMembership.Visibility = isAdmin ? Visibility.Visible : Visibility.Collapsed;
+                TxtUserMembershipDesc.Visibility = isAdmin ? Visibility.Collapsed : Visibility.Visible;
+                TxtAdminMembershipDesc.Visibility = isAdmin ? Visibility.Visible : Visibility.Collapsed;
             } else {
                 MessageBox.Show("No active user session found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 this.Close();
@@ -90,6 +98,18 @@ namespace PregnaCare_WpfApp {
             Login loginWindow = new Login();
             loginWindow.Show();
             
+            this.Close();
+        }
+
+        private void BtnViewMembership_Click(object sender, RoutedEventArgs e) {
+            UserMembershipPlanView userMembership = new();
+            userMembership.Show();
+            this.Close();
+        }
+        
+        private void BtnManageMembership_Click(object sender, RoutedEventArgs e) {
+            AdminMembershipPlanView adminMembership = new AdminMembershipPlanView();
+            adminMembership.Show();
             this.Close();
         }
     }

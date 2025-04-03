@@ -89,5 +89,18 @@ namespace DataAccessLayer.Repository
         {
             return _context.Users.Any(u => u.Email == email);
         }
+
+        public string GetUserRoleName(Guid userId)
+        {
+            var userRole = _context.UserRoles
+                .Where(ur => ur.UserId == userId && ur.IsDeleted != true)
+                .Join(_context.Roles,
+                      ur => ur.RoleId,
+                      r => r.Id,
+                      (ur, r) => new { UserRole = ur, Role = r })
+                .FirstOrDefault();
+
+            return userRole?.Role?.RoleName ?? string.Empty;
+        }
     }
 }

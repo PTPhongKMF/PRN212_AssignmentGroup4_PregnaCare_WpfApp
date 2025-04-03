@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 namespace PregnaCare_WpfApp.Utils {
     public static class UserSession {
         public static Guid Id { get; set; }
+        public static string RoleName { get; set; }
 
         // call .clear() when logging out
         public static void Clear() {
             Id = Guid.Empty;
+            RoleName = string.Empty;
         }
     }
 }
