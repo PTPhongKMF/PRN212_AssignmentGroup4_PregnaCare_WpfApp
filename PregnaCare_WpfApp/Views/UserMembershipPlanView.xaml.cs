@@ -79,5 +79,12 @@ namespace PregnaCare_WpfApp.Views
             membershipPlanView.Show();
             this.Close();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var userInformationView = new UserInformation();
+            userInformationView.Show();
+            this.Close();
+        }
     }
 } 

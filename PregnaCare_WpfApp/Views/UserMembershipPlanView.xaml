@@ -34,5 +34,6 @@
             <Button x:Name="btnDeactivate" Content="Disable" Width="100" Height="30" 
                     Click="btnDeactivate_Click"/>
         </StackPanel>
+        <Button Content="Back" HorizontalAlignment="Left" Margin="139,0,0,0" VerticalAlignment="Top" Height="30" Width="61" Click="Button_Click"/>
     </Grid>
 </Window> 
