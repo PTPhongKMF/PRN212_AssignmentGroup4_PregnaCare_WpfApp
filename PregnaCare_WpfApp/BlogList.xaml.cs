@@ -117,6 +117,7 @@ namespace PregnaCare_WpfApp
             
             // Refresh the blog list
             LoadData();
+            
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)

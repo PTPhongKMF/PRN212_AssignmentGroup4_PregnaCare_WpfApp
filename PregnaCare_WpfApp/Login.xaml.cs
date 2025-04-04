@@ -1,6 +1,8 @@
 ﻿using BusinessLogicLayer.Services;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Win32;
 using PregnaCare_WpfApp.Utils;
+using PregnaCare_WpfApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +42,7 @@ namespace PregnaCare_WpfApp
             }
             try
             {
+                var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
                 var useraccount = _userService.GetUser(email, password);
                 if (useraccount != null)
                 {
@@ -49,9 +52,9 @@ namespace PregnaCare_WpfApp
                     //MainWindow mainWindow = new MainWindow();
                     UserInformation userInformation = new UserInformation();
                     //mainWindow.Show();
-                    userInformation.Show();
-                    //BlogList blogList = new BlogList();
-                    //blogList.Show();
+                    //userInformation.Show();
+                    BlogList blogList = new BlogList();
+                    blogList.Show();
                     this.Close();
                 }
                 else

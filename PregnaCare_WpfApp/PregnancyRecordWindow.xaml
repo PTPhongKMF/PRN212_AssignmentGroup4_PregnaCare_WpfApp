@@ -1,0 +1,33 @@
+﻿<Window x:Class="PregnaCare_WpfApp.PregnancyRecordWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PregnaCare_WpfApp"
+        mc:Ignorable="d"
+            Title="Pregnancy Records" Height="450" Width="800" Loaded="Window_Loaded">
+<Grid>
+    <TabControl>
+        <TabItem Header="Danh sách hồ sơ mang thai">
+            <DataGrid x:Name="pregnancyRecordDataGrid" AutoGenerateColumns="True" Margin="10" />
+        </TabItem>
+        <TabItem Header="Thêm/Cập nhật hồ sơ mang thai">
+            <StackPanel Margin="10">
+                <TextBox x:Name="babyNameTextBox" Width="200" Margin="5" Text="Enter Baby'Name" />
+                <DatePicker x:Name="pregnancyStartDatePicker" Width="200" Margin="5" />
+                <DatePicker x:Name="expectedDueDatePicker" Width="200" Margin="5" />
+                <ComboBox x:Name="babyGenderComboBox" Width="200" Margin="5" Text="Select Gender">
+                    <ComboBoxItem Content="Male" />
+                    <ComboBoxItem Content="Female" />
+                </ComboBox>
+                <TextBox x:Name="imageUrlTextBox" Width="200" Margin="5" Text="Type Image URL" />
+                <Button Content="Thêm hồ sơ" Width="100" Margin="5" Click="AddButton_Click"/>
+                <Button Content="Cập nhật hồ sơ" Width="100" Margin="5" Click="UpdateButton_Click"/>
+            </StackPanel>
+        </TabItem>
+    </TabControl>
+    <TextBox x:Name="searchTextBox" Width="200" Margin="10" HorizontalAlignment="Right" />
+    <Button Content="Tìm kiếm" Width="100" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Top" Click="SearchButton_Click"/>
+    <Button Content="Xóa hồ sơ" Width="100" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="DeleteButton_Click"/>
+</Grid>
+</Window>
