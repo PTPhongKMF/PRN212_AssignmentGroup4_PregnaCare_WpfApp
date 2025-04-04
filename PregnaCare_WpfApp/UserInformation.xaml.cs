@@ -138,8 +138,9 @@ namespace PregnaCare_WpfApp {
         }
         
         private void BtnViewPregnancyRecords_Click(object sender, RoutedEventArgs e) {
-            // Empty implementation as requested
-            // Will be implemented in the future
+            PregnancyRecordWindow pregnancyRecordWindow = new();
+            pregnancyRecordWindow.Show();
+            this.Close();
         }
     }
 }

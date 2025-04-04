@@ -48,12 +48,18 @@ namespace PregnaCare_WpfApp
                     //MainWindow mainWindow = new MainWindow();
                     UserInformation userInformation = new UserInformation();
                     //mainWindow.Show();
-                    //userInformation.Show();
-                    BlogList blogList = new BlogList();
-                    blogList.Show();
+                    userInformation.Show();
+                    //BlogList blogList = new BlogList();
+                    //blogList.Show();
                     this.Close();
                 } else if (config["DefaultAdmin:Email"] == email && config["DefaultAdmin:Password"] == password) {
                     AdminMembershipPlanView window = new AdminMembershipPlanView();
+                    window.Show();
+                    this.Close();
+                    return;
+                } else if (config["DefaultStaff:Email"] == email && config["DefaultStaff:Password"] == password) {
+                    UserSession.RoleName = "staff";
+                    StaffRecordWindow window = new StaffRecordWindow();
                     window.Show();
                     this.Close();
                     return;
