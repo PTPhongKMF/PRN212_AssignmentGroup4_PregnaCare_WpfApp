@@ -53,11 +53,16 @@ namespace PregnaCare_WpfApp
                     //blogList.Show();
                     this.Close();
                 } else if (config["DefaultAdmin:Email"] == email && config["DefaultAdmin:Password"] == password) {
-                    AdminMembershipPlanView window = new AdminMembershipPlanView();
-                    window.Show();
+                    UserSession.Id = new Guid("6f8d8e85-04a7-4ac1-9a29-3f30d8a3d42b");
+                    UserSession.RoleName = "admin";
+                    UserInformation userInformation = new UserInformation();
+                    userInformation.Show();
+                    //AdminMembershipPlanView window = new AdminMembershipPlanView();
+                    userInformation.Show();
                     this.Close();
                     return;
                 } else if (config["DefaultStaff:Email"] == email && config["DefaultStaff:Password"] == password) {
+                    UserSession.Id = new Guid("6f8d8e85-04a7-4ac1-9a29-3f30d8a3d42b");
                     UserSession.RoleName = "staff";
                     StaffRecordWindow window = new StaffRecordWindow();
                     window.Show();

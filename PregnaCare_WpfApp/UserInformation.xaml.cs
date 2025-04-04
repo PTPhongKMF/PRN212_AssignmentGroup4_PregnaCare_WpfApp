@@ -35,10 +35,10 @@ namespace PregnaCare_WpfApp {
                 _currentUser = _userService.GetUserById(UserSession.Id);
                 
                 // If user not found, handle the error
-                if (_currentUser == null) {
-                    MessageBox.Show("Unable to load user data. Please try again later.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
+                //if (_currentUser == null) {
+                //    MessageBox.Show("Unable to load user data. Please try again later.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                //    return;
+                //}
                 
                 DisplayUserInfo();
                 
@@ -60,9 +60,13 @@ namespace PregnaCare_WpfApp {
                 // Pregnancy Records buttons - only visible for non-admin users
                 BtnViewPregnancyRecords.Visibility = isAdmin ? Visibility.Collapsed : Visibility.Visible;
                 TxtPregnancyRecordsDesc.Visibility = isAdmin ? Visibility.Collapsed : Visibility.Visible;
+                
+                // User Management section - only visible for admin users
+                BtnManageUsers.Visibility = isAdmin ? Visibility.Visible : Visibility.Collapsed;
+                TxtUserManagementDesc.Visibility = isAdmin ? Visibility.Visible : Visibility.Collapsed;
             } else {
-                MessageBox.Show("No active user session found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                this.Close();
+                //MessageBox.Show("No active user session found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                //this.Close();
             }
         }
         
@@ -140,6 +144,12 @@ namespace PregnaCare_WpfApp {
         private void BtnViewPregnancyRecords_Click(object sender, RoutedEventArgs e) {
             PregnancyRecordWindow pregnancyRecordWindow = new();
             pregnancyRecordWindow.Show();
+            this.Close();
+        }
+        
+        private void BtnManageUsers_Click(object sender, RoutedEventArgs e) {
+            UserManagementWindow userManagementWindow = new();
+            userManagementWindow.Show();
             this.Close();
         }
     }
