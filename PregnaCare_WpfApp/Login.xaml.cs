@@ -52,9 +52,9 @@ namespace PregnaCare_WpfApp
                     //MainWindow mainWindow = new MainWindow();
                     UserInformation userInformation = new UserInformation();
                     //mainWindow.Show();
-                    //userInformation.Show();
-                    BlogList blogList = new BlogList();
-                    blogList.Show();
+                    userInformation.Show();
+                    //BlogList blogList = new BlogList();
+                    //blogList.Show();
                     this.Close();
                 }
                 else
