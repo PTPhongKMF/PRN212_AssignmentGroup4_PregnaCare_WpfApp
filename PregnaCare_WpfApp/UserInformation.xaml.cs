@@ -56,6 +56,10 @@ namespace PregnaCare_WpfApp {
                 BtnManageMembership.Visibility = isAdmin ? Visibility.Visible : Visibility.Collapsed;
                 TxtUserMembershipDesc.Visibility = isAdmin ? Visibility.Collapsed : Visibility.Visible;
                 TxtAdminMembershipDesc.Visibility = isAdmin ? Visibility.Visible : Visibility.Collapsed;
+                
+                // Pregnancy Records buttons - only visible for non-admin users
+                BtnViewPregnancyRecords.Visibility = isAdmin ? Visibility.Collapsed : Visibility.Visible;
+                TxtPregnancyRecordsDesc.Visibility = isAdmin ? Visibility.Collapsed : Visibility.Visible;
             } else {
                 MessageBox.Show("No active user session found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 this.Close();
@@ -131,6 +135,11 @@ namespace PregnaCare_WpfApp {
             BlogList blogList = new BlogList();
             blogList.Show();
             this.Close();
+        }
+        
+        private void BtnViewPregnancyRecords_Click(object sender, RoutedEventArgs e) {
+            // Empty implementation as requested
+            // Will be implemented in the future
         }
     }
 }

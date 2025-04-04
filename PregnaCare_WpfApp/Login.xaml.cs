@@ -31,39 +31,36 @@ namespace PregnaCare_WpfApp
             InitializeComponent();
         }
 
-        private void btnLogin_Click(object sender, RoutedEventArgs e)
-        {
+        private void btnLogin_Click(object sender, RoutedEventArgs e) {
             string email = txtEmail.Text;
             string password = txtPassword.Password;
-            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
-            {
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password)) {
                 MessageBox.Show("Please enter both email and password.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            try
-            {
+            try {
                 var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
                 var useraccount = _userService.GetUser(email, password);
-                if (useraccount != null)
-                {
+                if (useraccount != null) {
                     MessageBox.Show("Login successful");
                     UserSession.Id = useraccount.Id;
                     UserSession.RoleName = _userService.GetUserRoleName(useraccount.Id);
                     //MainWindow mainWindow = new MainWindow();
                     UserInformation userInformation = new UserInformation();
                     //mainWindow.Show();
-                    userInformation.Show();
-                    //BlogList blogList = new BlogList();
-                    //blogList.Show();
+                    //userInformation.Show();
+                    BlogList blogList = new BlogList();
+                    blogList.Show();
                     this.Close();
-                }
-                else
-                {
+                } else if (config["DefaultAdmin:Email"] == email && config["DefaultAdmin:Password"] == password) {
+                    AdminMembershipPlanView window = new AdminMembershipPlanView();
+                    window.Show();
+                    this.Close();
+                    return;
+                } else {
                     MessageBox.Show("You have no permission to access this function");
                 }
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

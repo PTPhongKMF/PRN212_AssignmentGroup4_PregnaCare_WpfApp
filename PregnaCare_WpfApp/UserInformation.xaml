@@ -139,6 +139,15 @@
                             Width="300" Height="40" Background="#8A2BE2" Foreground="White" 
                             FontWeight="SemiBold" BorderThickness="0" Click="BtnManageMembership_Click"
                             HorizontalAlignment="Left" Visibility="Collapsed"/>
+                    
+                    <!-- Pregnancy Records Section - Only for Normal Users -->
+                    <TextBlock Text="Pregnancy Records" FontSize="20" FontWeight="Bold" Margin="0,30,0,10"/>
+                    <TextBlock x:Name="TxtPregnancyRecordsDesc" Text="View and manage your pregnancy records and history" 
+                              Margin="0,0,0,15" Foreground="#666666"/>
+                    <Button x:Name="BtnViewPregnancyRecords" Content="VIEW PREGNANCY RECORDS" 
+                            Width="300" Height="40" Background="#FF4081" Foreground="White" 
+                            FontWeight="SemiBold" BorderThickness="0" Click="BtnViewPregnancyRecords_Click"
+                            HorizontalAlignment="Left"/>
                 </StackPanel>
             </Grid>
         </Grid>
