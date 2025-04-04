@@ -117,11 +117,13 @@ namespace PregnaCare_WpfApp
             
             // Refresh the blog list
             LoadData();
-            
+            this.Close();
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
+            UserInformation userInfo = new UserInformation();
+            userInfo.Show();
             this.Close();
         }
     }
